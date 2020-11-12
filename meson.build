@@ -1,7 +1,8 @@
 project('stdx-allocator', 'd',
     meson_version: '>=0.45',
     license: 'BSL-1.0',
-    version: '2.77.2'
+    version: '2.77.5',
+    default_options: ['buildtype=release']
 )
 
 project_soversion = '0'
@@ -46,6 +47,7 @@ allocator_lib = library('stdx-allocator',
         [allocator_src],
         include_directories: [src_dir],
         install: true,
+        pic: true,
         version: meson.project_version(),
         soversion: project_soversion
 )
@@ -70,7 +72,7 @@ allocator_test_exe = executable('test_allocator',
     [allocator_src],
     include_directories: [src_dir],
     d_unittest: true,
-    link_args: '-main'
+    link_args: '--main'
 )
 test('test_allocator', allocator_test_exe)
 
